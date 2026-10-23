@@ -40,10 +40,10 @@ jobs:
 
       - name: Run Test Suite with Pytest & Coverage
         env:
-          FESTIFY_ENVIRONMENT: testing
-          FESTIFY_SECRET_KEY: testing-secret-key-for-automated-ci-runs
-          FESTIFY_LLM_PROVIDER: mock
-          FESTIFY_DATABASE_URL: sqlite:///:memory:
+          FESTIFY_ENVIRONMENT: "testing"
+          FESTIFY_SECRET_KEY: "testing-secret-key-for-automated-ci-runs"
+          FESTIFY_LLM_PROVIDER: "mock"
+          FESTIFY_DATABASE_URL: "sqlite:///:memory:"
         run: |
           pytest -v --cov=app --cov-report=term-missing tests/
 
@@ -64,4 +64,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: festify:latest
+          tags: "festify:latest"
