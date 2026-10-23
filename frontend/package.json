@@ -1,0 +1,26 @@
+{
+  "name": "festify-frontend",
+  "version": "1.0.0",
+  "description": "WCAG 2.1 AAA accessible web interface for Festify celebration and event planner",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm run test:a11y",
+    "test:a11y": "pa11y http://localhost:8000 --standard WCAG2AA",
+    "lint": "eslint app.js --env browser",
+    "serve": "python -m http.server 8080"
+  },
+  "keywords": [
+    "event-planner",
+    "wedding-planner",
+    "accessibility",
+    "wcag-aaa",
+    "voice-assistance",
+    "run-of-show"
+  ],
+  "author": "Festify Team",
+  "license": "MIT",
+  "devDependencies": {
+    "pa11y": "^8.0.0",
+    "axe-core": "^4.10.0"
+  }
+}

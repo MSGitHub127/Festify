@@ -1,0 +1,28 @@
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+*.env
+!.env.example
+
+# Testing & Coverage
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Database & Runtime Data
+*.db
+*.sqlite3
+data/
+/data
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+powershell.cmd

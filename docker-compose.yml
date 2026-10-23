@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: festify_app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - FESTIFY_APP_NAME=Festify
+      - FESTIFY_ENVIRONMENT=production
+      - FESTIFY_SECRET_KEY=prod-festify-session-secret-change-in-env-32b
+      - FESTIFY_DATABASE_URL=postgresql+psycopg2://festify:festify_secure_pass@db:5432/festify_db
+      - FESTIFY_LLM_PROVIDER=mock
+      - FESTIFY_ALLOWED_ORIGINS=["*"]
+      - PORT=8000
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  db:
+    image: postgres:16-alpine
+    container_name: festify_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: festify
+      POSTGRES_PASSWORD: festify_secure_pass
+      POSTGRES_DB: festify_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - festify_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U festify -d festify_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  festify_pgdata:
+    driver: local
