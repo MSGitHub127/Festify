@@ -55,20 +55,20 @@ Festify directly addresses every criteria evaluated by automated analyzers and h
 ## 🏗️ System Architecture
 
 ```mermaid
-flowchart TD
+graph TD
     subgraph UI ["Accessible Client Surface (WCAG 2.1 AAA)"]
-        WEB["Responsive Single-Page App\n(HTML5 / CSS / Vanilla JS)"]
-        SPEECH["Web Speech API\nAudio Narration"]
-        A11Y["A11y Toolbar\n(Font Scaling, High Contrast, Skip Link)"]
+        WEB["Responsive Single-Page App<br/>(HTML5 / CSS / Vanilla JS)"]
+        SPEECH["Web Speech API<br/>Audio Narration"]
+        A11Y["A11y Toolbar<br/>(Font Scaling, High Contrast, Skip Link)"]
         WEB --- SPEECH
         WEB --- A11Y
     end
 
     subgraph API ["FastAPI Application Layer (app/main.py)"]
         CORS["CORS & GZip Middleware"]
-        SEC_HEADERS["Security Headers (CSP, X-Frame, Nosniff)"]
-        AUTH["JWT Session Token Auth & Rate Limiter"]
-        ROUTERS["API Routers:\n/events | /budget | /timeline | /vendors | /ideas | /compare"]
+        SEC_HEADERS["Security Headers<br/>(CSP, X-Frame, Nosniff)"]
+        AUTH["JWT Session Auth & Rate Limiter"]
+        ROUTERS["REST API Routers<br/>(events, budget, timeline, vendors, ideas, compare)"]
         CORS --> SEC_HEADERS --> AUTH --> ROUTERS
     end
 
@@ -79,35 +79,35 @@ flowchart TD
     end
 
     subgraph ENGINES ["Domain Planning Intelligence (app/planner/)"]
-        BUDGET_ENG["Budget Engine\n(Category Allocation & 10% Buffer)"]
-        TIME_ENG["Timeline Engine\n(12-Mo Macro & Day-Of Run-of-Show)"]
-        VEND_ENG["Vendor Rubric\n(Vetting & Red Flags)"]
-        IDEA_ENG["Creative Idea Engine\n(Palettes, Menus, Speeches)"]
-        PERMIT_ENG["Statutory Permit Rules\n(Noise, Alcohol, Fire, Health)"]
+        BUDGET_ENG["Budget Engine<br/>(Allocations & 10% Buffer)"]
+        TIME_ENG["Timeline Engine<br/>(12-Mo Macro & Day-Of Run-of-Show)"]
+        VEND_ENG["Vendor Rubric<br/>(Vetting & Red Flags)"]
+        IDEA_ENG["Creative Idea Engine<br/>(Palettes, Menus, Speeches)"]
+        PERMIT_ENG["Statutory Permit Rules<br/>(Noise, Alcohol, Fire, Health)"]
         DOSSIER["Markdown Dossier Compiler"]
     end
 
     subgraph LLM ["Pluggable LLM Layer (app/llm/)"]
         FACTORY["LLMProvider Factory"]
-        MOCK["MockProvider\n(Offline Synonyms & Morphological Matching)"]
-        CLAUDE["Anthropic Claude 3.5 Sonnet\n(Vision & Generative Insights)"]
+        MOCK["MockProvider<br/>(Offline Synonyms & Morphological Retrieval)"]
+        CLAUDE["Anthropic Claude 3.5 Sonnet<br/>(Vision & Generative Insights)"]
         FACTORY --> MOCK
         FACTORY --> CLAUDE
     end
 
     subgraph DB ["Persistence Layer (app/db.py)"]
         SQLA["SQLAlchemy 2.0 Engine"]
-        PG["PostgreSQL 16 Pool\n(pool_size=10, max_overflow=20)"]
+        PG["PostgreSQL 16 Pool<br/>(pool_size=10, max_overflow=20)"]
         SQLITE["SQLite Development & Memory Store"]
         SQLA --> PG
         SQLA --> SQLITE
     end
 
-    WEB -->|"HTTP / JSON (Bearer Token)"| API
-    ROUTERS --> SEC
-    ROUTERS --> ENGINES
-    ROUTERS --> LLM
-    ROUTERS --> DB
+    WEB -->|"HTTP / JSON (Bearer Token)"| CORS
+    ROUTERS --> PII
+    ROUTERS --> BUDGET_ENG
+    ROUTERS --> FACTORY
+    ROUTERS --> SQLA
 ```
 
 ---
