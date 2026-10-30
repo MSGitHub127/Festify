@@ -4,13 +4,18 @@
 ### GenAI-Powered Celebration & Event Planning Assistant
 **Intelligent Coordination for Weddings, Milestone Birthdays & Community Festivals**
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Google%20Cloud%20Run-4285F4?logo=googlecloud&logoColor=white)](https://festify-162669160069.us-central1.run.app)
 [![CI/CD Pipeline](https://github.com/MSGitHub127/Festify/actions/workflows/ci.yml/badge.svg)](https://github.com/MSGitHub127/Festify/actions)
 [![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AAA-success.svg)](ACCESSIBILITY.md)
 [![Test Suite](https://img.shields.io/badge/tests-54%20passed-brightgreen.svg)](tests/)
 [![Security](https://img.shields.io/badge/Security-PII%20Redaction%20%2B%20AES--128-blueviolet.svg)](app/security.py)
-[![Offline Ready](https://img.shields.io/badge/Offline%20Evaluation-Zero%20API%20Key%20Needed-orange.svg)](#pluggable-llm-layer)
+
+<p align="center">
+  🌐 <b>Live Deployed App:</b> <a href="https://festify-162669160069.us-central1.run.app"><b>https://festify-162669160069.us-central1.run.app</b></a><br/>
+  📚 <b>Interactive API Docs (Swagger):</b> <a href="https://festify-162669160069.us-central1.run.app/docs">https://festify-162669160069.us-central1.run.app/docs</a>
+</p>
 
 </div>
 
