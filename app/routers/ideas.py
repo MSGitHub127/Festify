@@ -4,11 +4,12 @@ from __future__ import annotations
 import json
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Depends, Response
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app.db import get_db
+from app.exceptions import EventNotFoundError
 from app.llm.provider import get_llm_provider
 from app.models import CreativeIdeas, EventRecord
 from app.security import decrypt_data, sanitize_prompt_input
@@ -47,7 +48,7 @@ def ask_event_question(
     """Answer questions grounded strictly in the generated event plan."""
     record = db.get(EventRecord, event_id)
     if not record or not record.encrypted_details:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Event not found.")
+        raise EventNotFoundError(event_id)
 
     decrypted = json.loads(decrypt_data(record.encrypted_details))
     context = decrypted.get("dossier", "")
@@ -71,7 +72,7 @@ def export_event_dossier(
     """Export the formatted Markdown Client & Vendor Dossier."""
     record = db.get(EventRecord, event_id)
     if not record or not record.encrypted_details:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Event not found.")
+        raise EventNotFoundError(event_id)
 
     decrypted = json.loads(decrypt_data(record.encrypted_details))
     dossier_text = decrypted.get("dossier", "# Event Dossier Not Found")

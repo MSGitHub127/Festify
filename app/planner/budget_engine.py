@@ -124,7 +124,16 @@ COST_SAVING_TIPS: dict[str, list[str]] = {
 
 
 def generate_budget_breakdown(event_type: str, total_budget: float, guest_count: int) -> BudgetBreakdown:
-    """Calculate mathematically balanced category allocations, per-guest numbers, and savings tips."""
+    """Calculate mathematically balanced category allocations, per-guest numbers, and savings tips.
+
+    Args:
+        event_type: Category identifier ('wedding', 'birthday', 'community').
+        total_budget: Total target budget ceiling in USD.
+        guest_count: Expected headcount of attendees.
+
+    Returns:
+        BudgetBreakdown: Complete breakdown with percentages, amounts, contingency, and tips.
+    """
     profile = BUDGET_ALLOCATION_PROFILES.get(event_type.lower(), BUDGET_ALLOCATION_PROFILES[EventType.WEDDING.value])
     categories: list[CategoryBudget] = []
     contingency = 0.0
@@ -161,7 +170,15 @@ def generate_budget_breakdown(event_type: str, total_budget: float, guest_count:
 
 
 def analyze_budget_variance(allocated: float, actual: float) -> dict[str, str | float]:
-    """Calculate variance between allocated budget and vendor quote/invoice."""
+    """Calculate variance between allocated budget and vendor quote/invoice.
+
+    Args:
+        allocated: The budgeted baseline ceiling in USD.
+        actual: The actual quote or invoice amount from the vendor in USD.
+
+    Returns:
+        dict[str, str | float]: Variance metrics including difference, percent, status, and alert message.
+    """
     diff = round(actual - allocated, 2)
     percent_diff = round((diff / allocated * 100), 1) if allocated > 0 else 0.0
 

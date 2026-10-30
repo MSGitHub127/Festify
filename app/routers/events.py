@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.deps import get_current_session_id
+from app.exceptions import EventNotFoundError
 from app.models import EventCreateRequest, EventRecord, FullEventPlanResponse
 from app.planner.budget_engine import generate_budget_breakdown
 from app.planner.dossier import compile_event_dossier
@@ -105,7 +106,7 @@ def get_event_plan(
     """Retrieve an existing event plan by ID."""
     record = db.get(EventRecord, event_id)
     if not record:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Event plan not found.")
+        raise EventNotFoundError(event_id)
 
     if not record.encrypted_details:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Corrupted event record.")

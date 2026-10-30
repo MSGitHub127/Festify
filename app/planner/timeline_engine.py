@@ -149,7 +149,14 @@ DAY_OF_RUN_OF_SHOW_TEMPLATES: dict[str, list[dict[str, str]]] = {
 
 
 def detect_timeline_conflicts(items: list[RunOfShowItem]) -> list[str]:
-    """Inspect run-of-show timing for logistical overlaps and missing buffer windows."""
+    """Inspect run-of-show timing for logistical overlaps and missing buffer windows.
+
+    Args:
+        items: List of sequential RunOfShowItem schedule entries.
+
+    Returns:
+        list[str]: Warning messages detailing any simultaneous or overlapping events.
+    """
     warnings: list[str] = []
     seen_times: dict[str, list[str]] = {}
 
@@ -171,7 +178,14 @@ def detect_timeline_conflicts(items: list[RunOfShowItem]) -> list[str]:
 
 
 def generate_timeline_plan(event_type: str) -> TimelinePlan:
-    """Generate comprehensive macro countdown milestones and micro run-of-show items."""
+    """Generate comprehensive macro countdown milestones and micro run-of-show items.
+
+    Args:
+        event_type: Celebration category ('wedding', 'birthday', 'community').
+
+    Returns:
+        TimelinePlan: Complete countdown milestones, run-of-show table, and conflict alerts.
+    """
     type_key = event_type.lower()
     macro_data = MACRO_MILESTONE_TEMPLATES.get(type_key, MACRO_MILESTONE_TEMPLATES[EventType.WEDDING.value])
     day_of_data = DAY_OF_RUN_OF_SHOW_TEMPLATES.get(type_key, DAY_OF_RUN_OF_SHOW_TEMPLATES[EventType.WEDDING.value])

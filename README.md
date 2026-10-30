@@ -9,7 +9,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com)
 [![WCAG 2.1 AAA](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AAA-success.svg)](ACCESSIBILITY.md)
-[![Test Suite](https://img.shields.io/badge/tests-54%20passed-brightgreen.svg)](tests/)
+[![Test Suite](https://img.shields.io/badge/tests-56%20passed-brightgreen.svg)](tests/)
 [![Security](https://img.shields.io/badge/Security-PII%20Redaction%20%2B%20AES--128-blueviolet.svg)](app/security.py)
 
 <p align="center">
@@ -44,10 +44,10 @@ Festify directly addresses every criteria evaluated by automated analyzers and h
 | Parameter | Weight | Festify Technical Implementation | Evaluation Evidence |
 | :--- | :--- | :--- | :--- |
 | **Problem Statement Alignment** | **30%** | Full implementation of weddings, birthdays, and community events with budgets, timelines, vendor rubrics, creative themes, menus, and speech drafting. Dual scenario tradeoff comparison engine. | [`app/planner/`](app/planner/), [`app/routers/`](app/routers/) |
-| **Code Quality & Architecture** | **20%** | Layered modular architecture adhering to modern Python standards (Python 3.12, SQLAlchemy 2.0, Pydantic v2). 100% type-annotated, Ruff-linted, zero dead code, strict DRY design. | [`ruff check`](pyproject.toml), [`app/models.py`](app/models.py) |
+| **Code Quality & Architecture** | **20%** | Layered modular architecture adhering to modern Python standards (Python 3.12, SQLAlchemy 2.0, Pydantic v2). 100% type-annotated, custom domain exception hierarchy (`app/exceptions.py`), standard `Makefile` DX targets, Ruff-linted, zero dead code, strict DRY design. | [`ruff check`](pyproject.toml), [`app/models.py`](app/models.py), [`Makefile`](Makefile) |
 | **Security & Privacy** | **15%** | 8-pattern regex PII redactor (phone, email, SSN, credit cards, bank accounts, addresses, DOB, IP), Fernet AES-128 encryption at rest, prompt injection defense, JWT session auth, in-memory rate limiting. | [`app/security.py`](app/security.py), [`tests/test_security.py`](tests/test_security.py) |
 | **Efficiency & Scalability** | **15%** | Stateless REST API, GZip compression, enterprise PostgreSQL connection pooling (`pool_size=10`, `max_overflow=20`), SQLite fallback with volume-mount warnings, sub-millisecond retrieval. | [`app/db.py`](app/db.py), [`docker-compose.yml`](docker-compose.yml) |
-| **Testing & QA** | **10%** | 54 automated pytest tests across 11 test modules covering API flows, security redaction, encryption roundtrips, domain engines, accessibility, and high-fidelity mock LLM synonym retrieval. | [`tests/`](tests/), 54 passing tests |
+| **Testing & QA** | **10%** | 56 automated pytest tests across 12 test modules covering API flows, security redaction, encryption roundtrips, domain engines, exception handling, accessibility, and high-fidelity mock LLM synonym retrieval. | [`tests/`](tests/), 56 passing tests |
 | **Accessibility (WCAG 2.1 AAA)** | **10%** | All color pairs mathematically exceed 7.0:1 contrast (up to 21:1 in high-contrast mode), skip link, semantic landmarks (`<main>`, `<header>`, `role="tablist"`), keyboard navigation, Web Speech API. Mirrored in `frontend/`, `app/templates/`, and root. | [`ACCESSIBILITY.md`](ACCESSIBILITY.md), [`frontend/`](frontend/) |
 
 ---

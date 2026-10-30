@@ -13,6 +13,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
 from app.db import init_db
+from app.exceptions import FestifyBaseException
 from app.routers import budget, compare, events, ideas, session, timeline, vendors
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
@@ -37,6 +38,10 @@ def create_app() -> FastAPI:
         version=settings.version,
         lifespan=lifespan,
     )
+
+    @app.exception_handler(FestifyBaseException)
+    async def handle_festify_exception(_: Request, exc: FestifyBaseException) -> JSONResponse:
+        return JSONResponse(status_code=exc.status_code, content={"detail": exc.message})
 
     # Middleware
     app.add_middleware(

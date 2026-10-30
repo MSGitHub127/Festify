@@ -5,7 +5,16 @@ from app.models import EventType, StatutoryPermits
 
 
 def evaluate_statutory_permits(event_type: str, guest_count: int, location: str | None = None) -> StatutoryPermits:
-    """Evaluate context-aware statutory rules, permit requirements, and capacity safety thresholds."""
+    """Evaluate context-aware statutory rules, permit requirements, and capacity safety thresholds.
+
+    Args:
+        event_type: Category identifier ('wedding', 'birthday', 'community').
+        guest_count: Expected attendance.
+        location: Venue address or descriptive venue type (optional).
+
+    Returns:
+        StatutoryPermits: Permit statuses, liquor guidelines, food hygiene rules, and capacity limits.
+    """
     e_type = event_type.lower()
 
     if e_type == EventType.COMMUNITY.value:

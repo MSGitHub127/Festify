@@ -127,6 +127,15 @@ class BudgetBreakdown(BaseModel):
     cost_saving_tips: list[str]
 
 
+class VarianceAnalysisResponse(BaseModel):
+    allocated: float = Field(..., description="Allocated budget in USD")
+    actual: float = Field(..., description="Actual quote or invoice amount in USD")
+    difference: float = Field(..., description="Variance difference (actual - allocated)")
+    percent_variance: float = Field(..., description="Percentage variance from allocated amount")
+    status: str = Field(..., description="Budget status: on_target, under_budget, or over_budget")
+    alert: str = Field(..., description="Human-readable recommendation or alert message")
+
+
 class TimelineMilestone(BaseModel):
     timeframe: str
     title: str

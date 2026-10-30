@@ -22,7 +22,23 @@ def compile_event_dossier(
     creative_ideas: CreativeIdeas,
     permits: StatutoryPermits,
 ) -> str:
-    """Produce a complete, structured Markdown Event Dossier ready for clients, vendors, and coordinators."""
+    """Produce a complete, publication-grade Markdown Event Dossier for clients and vendors.
+
+    Args:
+        title: Cleaned event name.
+        event_type: Category ('wedding', 'birthday', 'community').
+        guest_count: Total expected attendance.
+        total_budget: Overall financial cap in USD.
+        vibe_theme: Chosen creative theme or aesthetic keywords.
+        budget: Calculated BudgetBreakdown schema.
+        timeline: Detailed TimelinePlan with countdown and run-of-show.
+        vendor_rubric: Category-specific vendor vetting items.
+        creative_ideas: Curated creative package including dietary menu and speeches.
+        permits: Evaluated statutory permit and safety regulations.
+
+    Returns:
+        str: Fully formatted, exportable Markdown dossier text.
+    """
     lines: list[str] = [
         f"# 📋 Festify Event Dossier: {title}",
         "",

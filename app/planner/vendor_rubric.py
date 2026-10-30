@@ -158,7 +158,14 @@ VENDOR_CATEGORY_RUBRICS: dict[str, list[dict]] = {
 
 
 def get_vendor_checklists(event_type: str) -> list[VendorChecklistItem]:
-    """Retrieve structured vetting questions, red flags, and delivery milestones."""
+    """Retrieve structured vetting questions, red flags, and delivery milestones.
+
+    Args:
+        event_type: Category identifier ('wedding', 'birthday', 'community').
+
+    Returns:
+        list[VendorChecklistItem]: Structured vetting checklists per vendor category.
+    """
     key = event_type.lower()
     raw = VENDOR_CATEGORY_RUBRICS.get(key, VENDOR_CATEGORY_RUBRICS[EventType.WEDDING.value])
     return [VendorChecklistItem(**item) for item in raw]

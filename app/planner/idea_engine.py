@@ -170,7 +170,15 @@ SPEECHES: dict[str, dict[str, str]] = {
 
 
 def generate_creative_ideas(event_type: str, vibe_theme: str | None = None) -> CreativeIdeas:
-    """Generate cohesive creative packages: 3 complete themes, dietary menus, activities, favors, and speeches."""
+    """Generate cohesive creative packages: 3 complete themes, dietary menus, activities, favors, and speeches.
+
+    Args:
+        event_type: Category identifier ('wedding', 'birthday', 'community').
+        vibe_theme: User-requested aesthetic or mood keyword (optional).
+
+    Returns:
+        CreativeIdeas: Packaged themes with 5-tone palettes, dietary menus, activities, and speeches.
+    """
     key = event_type.lower()
     themes_raw = THEME_TEMPLATES.get(key, THEME_TEMPLATES[EventType.WEDDING.value])
     menu_raw = MENU_TEMPLATES.get(key, MENU_TEMPLATES[EventType.WEDDING.value])
